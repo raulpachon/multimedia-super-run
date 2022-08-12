@@ -4,21 +4,8 @@ using UnityEngine;
 
 public class Manger : MonoBehaviour
 {
-   /* 
-   //mostrar pantalla game over
-   
-   public GameObject GameOverText;
-     public GameObject GameOverStatic;
-
-    // Start is called before the first frame update
-    void Start()
+   /* public void homeGo() 
     {
-    Manger.GameOverStatic  = GameOverText;
-    Manger.GameOverStatic.gameObject.SetActive(false);
-    }
-
-    public static void show()
-    {
-    manger.GameOverStatic.gameObject.SetActive(true);
+     SceneManager.LoadScene(0); 
     }*/
 }
