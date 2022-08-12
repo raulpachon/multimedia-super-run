@@ -2,17 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.UI;
 
+
+   
 public class personaje2 : MonoBehaviour
 {
     Rigidbody2D caballeroRB;
     public float maxVelocidad;
     Animator caballeroAnim;
     public bool puedeMover = true;
-
-    //saltar
-    bool enSuelo = false;
+    public Transform Checker;
+    public bool enSuelo = false;
     float chequearRadioSuelo = 0.2f;
+    float xInicial;
+    float yInicial;
+    int vidas = 3;
+    int monedas = 0;
+    public Text vidast;
+    public Text monedast;
+    //saltar
+    
     public LayerMask capaSuelo;
     public Transform chequearSuelo;
     public float poderSalto;
@@ -24,6 +34,8 @@ public class personaje2 : MonoBehaviour
         
     // Start is called before the first frame update
     void Start(){
+        xInicial = transform.position.x;
+        yInicial = transform.position.y;
         caballeroRB = GetComponent<Rigidbody2D> ();
         caballeroRender = GetComponent<SpriteRenderer> ();
         caballeroAnim = GetComponent<Animator>();
@@ -60,15 +72,15 @@ public class personaje2 : MonoBehaviour
             {
                 voltear();
             }
-
+            caballeroAnim.SetFloat("Horizontal", Mathf.Abs(mover));
             caballeroRB.velocity = new Vector2(mover * maxVelocidad, caballeroRB.velocity.y);
-            caballeroAnim.SetFloat("VelMovimiento", Mathf.Abs(mover));
+            caballeroAnim.SetFloat("maxVelocidad", Mathf.Abs(mover));
 
         }
         else
         {
             caballeroRB.velocity = new Vector2(0, caballeroRB.velocity.y);
-            caballeroAnim.SetFloat("VelMovimiento", 0);
+            caballeroAnim.SetFloat("maxVelocidad", 0);
         }
 
     }
@@ -83,5 +95,17 @@ public class personaje2 : MonoBehaviour
     void tooglePuedeMover()
     {
         puedeMover = !puedeMover;
+    } 
+    public void Recolocar()
+    {
+        transform.position = new Vector2(xInicial,yInicial);
+        vidas--;
+        vidast.text = vidas.ToString();   
+    } 
+    public void EcoPoint()
+    {
+        monedas++;
+        monedast.text = monedas.ToString();
+   
     } 
 }
